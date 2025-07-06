@@ -14,9 +14,11 @@ const pubnub = new PubNub({
 
 function App() {
   return (
+    <div className='bg-amber-50 w-screen h-screen p-5 m-5'>
     <PubNubProvider client={pubnub}>
-      <Chat otherUser={otherUser} />
+    <Chat otherUser={otherUser} />
     </PubNubProvider>
+    </div>
   );
 }
 

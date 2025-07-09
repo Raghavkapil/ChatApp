@@ -1,29 +1,29 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from "@eslint/js";
+import globals from "globals";
+import pluginReact from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
+
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"] },
   {
-    files: ['**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
+    files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions: { globals: globals.browser },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'warn',
+      'quotes': ['warn', 'single'],
+      'semi': ['warn', 'always'],
+      'eqeqeq': ['warn', 'always'],
+      'no-console': 'warn',
+      'no-var': 'error',
+      'indent': ['warn', 2],
+      'no-debugger': 'error',
+      'no-undef': 'error',
     },
+    settings: {
+      react: {
+        version: 'detect',
+      }
+    }
   },
-])
+  pluginReact.configs.flat.recommended,
+]);
